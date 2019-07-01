@@ -50,11 +50,6 @@ router.get('/teachers/:id', async (req, res) => {
   }
 });
 
-//  TODO : Change method
-// router.post('/teachers/me/avatar', auth, avatar.single('avatar'), (req, res) => {
-//   res.send();
-// })
-
 router.patch('/teachers/:id/photo', photo.single('photo'), async (req, res) => {
   try {
     const { id: _id } = req.params;
@@ -76,7 +71,7 @@ router.post("/teachers", async (req, res) => {
       ...req.body,
       '_id': id,
     });
-
+    
     //  Save teacher to db
     const result = await teacher.save();
 
@@ -125,15 +120,5 @@ router.get('/teachers/:id/subjects', async (req, res) => {
     res.status(500).send()
   }
 });
-
-// router.delete('/me', auth, async (req, res) => {
-//   try {
-//     await req.teacher.remove()
-//     res.send()
-//   } catch (e) {
-//     res.status(500).send()
-//   }
-// });
-
 
 module.exports = router;

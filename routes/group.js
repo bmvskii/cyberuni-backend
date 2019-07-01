@@ -145,13 +145,7 @@ router.patch("/groups/:id/curator", async (req, res) => {
 });
 
 router.patch('/groups/:id', async (req, res) => {
-  // const updates = Object.keys(req.body);
-  // const allowedUpdates = ['description', 'completed'];
-  // const isValidOperation = updates.every(update => allowedUpdates.includes(update));
-
-  // if (!isValidOperation) {
-  //   return res.status(400).send('Invalid operation');
-  // }
+  const updates = Object.keys(req.body);
 
   try {
     const id = req.params['id'];

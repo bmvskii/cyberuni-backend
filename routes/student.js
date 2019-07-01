@@ -79,7 +79,7 @@ router.post("/students", async (req, res) => {
     } else {
       semester = await Semester.findById({ _id: student.semester });
     }
-
+    
     Array
       .from(semester.disciplines)
       .map(({ subject, type }) => savedStudent.learning_subjects.push({

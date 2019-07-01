@@ -1,7 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
-
 require('../db');
 
 const studentRouter = require('../routes/student');
@@ -36,11 +35,6 @@ app.use(groupRouter);
 app.use(authRouter);
 app.use(cathedraRouter);
 app.use(userRouter);
-
-const multer = require('multer')
-const uploads = multer({
-  'dest': 'images',
-});
 
 app.listen(port, () => {
   console.log(`Express is working on ${port}`)

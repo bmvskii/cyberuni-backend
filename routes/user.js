@@ -21,8 +21,8 @@ router.patch('/me', auth, async (req, res) => {
     const updates = Object.keys(req.body);
 
     updates.forEach(update => req.user[update] = req.body[update]);
+    
     await req.user.save();
-
     res.send(req.user);
 });
 
@@ -35,7 +35,6 @@ router.patch('/me/photo', auth, photo.single('photo'), async (req, res) => {
 router.get('/me/group', auth, async (req, res) => {
     try {
         await req.user.populate('getMyGroup').execPopulate();
-        console.log(req.user.group);
         res.send(req.user.group);
     } catch (e) {
         res.status(404).send(e);

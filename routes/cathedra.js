@@ -1,6 +1,5 @@
 const express = require('express');
 const auth = require('../middleware/auth');
-// const mongoose = require('mongoose');
 
 const Cathedra = require('../models/cathedra');
 const router = new express.Router();
@@ -38,7 +37,6 @@ router.patch('/cathedras/:id/headman/:teacher_id', async (req, res) => {
   }
 });
 
-//  Get subject by id
 router.get('/cathedras/:id', auth, async (req, res) => {
   try {
     const cathedra = await Cathedra.find({ _id: req.params.id, owner: req.user._id });
@@ -48,29 +46,20 @@ router.get('/cathedras/:id', auth, async (req, res) => {
   }
 });
 
-//  Update subject by id
 router.patch('/cathedras/:id', auth, async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ['description', 'completed'];
-  const isValidOperation = updates.every(update => allowedUpdates.includes(update));
-
-  if (!isValidOperation) {
-    return res.status(400).send('Invalid operation');
-  }
-
   try {
     const id = req.params['id'];
-    const subject = await Cathedra.findById(id);
+    const cathedra = await Cathedra.findById(id);
 
     updates.forEach(update => subject[update] = req.body[update]);
 
-    subject.save();
-
-    if (!subject) {
+    await cathedra.save();
+    if (!cathedra) {
       return res.status(404).send();
     }
 
-    res.send(subject);
+    res.send(cathedra);
   } catch (e) {
     res.status(400).send(e);
   }

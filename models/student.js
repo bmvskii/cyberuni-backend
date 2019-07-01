@@ -3,7 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const { generateAuthToken, findByCredentials } = require('../utils');
+const { generateAuthToken } = require('../utils');
 const { HOST_URL } = require('../config/db_settings');
 
 const Task = require('../models/task')
@@ -164,6 +164,7 @@ studentSchema.methods.toJSON = function () {
 }
 
 studentSchema.methods.generateAuthToken = generateAuthToken
+
 studentSchema.statics.findByCredentials = async (email, password, model) => {
   const user = await Student.findOne({ email });
   if (!user) {

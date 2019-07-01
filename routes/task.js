@@ -27,7 +27,6 @@ router.post("/tasks", auth, async (req, res) => {
   }
 });
 
-//  TODO : Change method
 router.patch('/tasks/:id', auth, async (req, res) => {
   const updates = Object.keys(req.body);
   try {
@@ -36,7 +35,7 @@ router.patch('/tasks/:id', auth, async (req, res) => {
 
     updates.forEach(update => task[update] = req.body[update]);
 
-    task.save();
+    await task.save();
 
     if (!task) {
       return res.status(404).send();
@@ -48,7 +47,6 @@ router.patch('/tasks/:id', auth, async (req, res) => {
   }
 });
 
-//  TODO : Change method
 router.delete('/tasks/:id', auth, async (req, res) => {
   try {
     const id = req.params['id'];

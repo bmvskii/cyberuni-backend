@@ -17,7 +17,7 @@ router.post('/logout', auth, async (req, res) => {
   }
 });
 
-//  TODO : Change method
+
 router.post('/logoutAll', auth, async (req, res) => {
   try {
     req.user.tokens = [];
@@ -37,6 +37,7 @@ router.post('/login', async (req, res) => {
     const USER_NOT_FOUND = 400;
 
     const user = await Student.findByCredentials(email, password, 'student');
+    
     if (!user || user === USER_NOT_FOUND || user === PASSWORD_DOESNT_MATCH) {
       throw new Error('Unable to login');
     }

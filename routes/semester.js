@@ -34,14 +34,4 @@ router.get('/semesters/:id', auth, async (req, res) => {
   }
 });
 
-// router.get('/semesters/:id', auth, async (req, res) => {
-//   try {
-//     const { id: _id } = req.params;
-//     const semester = await Semesters.findById(_id);
-//     res.status(200).send(semester);
-//   } catch (e) {
-//     res.status(400).send(e);
-//   }
-// });
-
 module.exports = router;

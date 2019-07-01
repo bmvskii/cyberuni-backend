@@ -29,12 +29,6 @@ const courseScheme = new mongoose.Schema({
   }
 });
 
-courseScheme.methods.getAllSubjects = function () {
-  const course = this;
-
-  
-}
-
 const Course = new mongoose.model('Course', courseScheme);
 
 module.exports = Course;

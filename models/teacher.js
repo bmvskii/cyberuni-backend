@@ -124,12 +124,7 @@ const teacherScheme = new mongoose.Schema({
     type: String,
     default: null,
   },
-  // tokens: [{
-  //   token: {
-  //     type: String,
-  //     required: true,
-  //   }
-  // }],
+
 }, {
     timestamps: true,
   });
@@ -137,9 +132,6 @@ const teacherScheme = new mongoose.Schema({
 teacherScheme.pre('save', async function (next) {
   const teacher = this;
 
-  // if (teacher.isModified('password')) {
-  //   teacher.password = await bcrypt.hash(teacher.password, 8);
-  // }
   teacher.photo = `${HOST_URL}/teachers/${teacher._id}/photo`;
 
   next();
@@ -150,8 +142,6 @@ teacherScheme.methods.toJSON = function () {
   const teacherObject = teacher.toObject()
 
   delete teacherObject.photo_source
-  // delete teacherObject.tokens
-
   return teacherObject
 }
 
@@ -165,14 +155,6 @@ teacherScheme.virtual('getCathedra', {
   'ref': 'Cathedra',
   'localField': 'cathedra',
   'foreignField': '_id',
-});
-
-teacherScheme.pre('remove', async function (next) {
-  const teacher = this
-
-  // await Task.deleteMany({ owner: teacher._id });
-
-  next()
 });
 
 teacherScheme.methods.generateAuthToken = generateAuthToken
